@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'entity/transaction.dart';
+import 'widget/chart.dart';
 
 void main() {
   runApp(MyApp());
@@ -122,7 +123,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
       ),
       body:Column(
         children: <Widget>[
-          //Chart(_last7DaysTx);
+          Chart(_last7DaysTx),
           //TransactionList(_listTransaction, deleteTxDAO);
         ],
       ),
