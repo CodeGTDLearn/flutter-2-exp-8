@@ -110,5 +110,27 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Personal Expenses 8'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => showAddModal(context),
+          ),
+        ],
+      ),
+      body:Column(
+        children: <Widget>[
+          //Chart(_last7DaysTx);
+          //TransactionList(_listTransaction, deleteTxDAO);
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showAddModal(context),
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
