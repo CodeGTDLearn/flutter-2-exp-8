@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'entity/transaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,8 +55,60 @@ class MyHomeApp extends StatefulWidget {
 }
 
 class _MyHomeAppState extends State<MyHomeApp> {
+  final List<Transaction> _listTransaction = [
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'New Hat',
+      amount: 99.99,
+      date: DateTime.now(),
+    ),
+  ];
+
+  void deleteTxDAO(String id) {
+    setState(() {
+      _listTransaction.removeWhere((tx) => tx.id == id);
+    });
+  }
+
+  void createTxDAO(
+    String title,
+    double amount,
+    DateTime date,
+  ) {
+    final newTx = Transaction(
+        title: title,
+        amount: amount,
+        date: date,
+        id: DateTime.now().toString());
+    setState(() {
+      _listTransaction.add(newTx);
+    });
+  }
+
+  List<Transaction> get _last7DaysTx {
+    return _listTransaction.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
+  void showAddModal(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque, onTap: () {},
+            //child: NewTransaction(createTxDAO),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
   }
 }
