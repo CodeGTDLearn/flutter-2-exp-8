@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepOrangeAccent,
         fontFamily: 'QuickSand',
 
+
         //Text Theme
         textTheme: ThemeData.light().textTheme.copyWith(
               //textTheme title customization
@@ -126,11 +127,13 @@ class _MyHomeAppState extends State<MyHomeApp> {
           ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Chart(_last7DaysTx),
-          TransactionList(_listTransaction, deleteTxDAO),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Chart(_last7DaysTx),
+            TransactionList(_listTransaction, deleteTxDAO),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddModal(context),
