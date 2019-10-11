@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'entity/transaction.dart';
 import 'widget/chart.dart';
+import 'widget/newTransaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My last Expense App', home: MyHomeApp(),
+      title: 'My last Expense App',
+      home: MyHomeApp(),
+      debugShowCheckedModeBanner: false,
 
       //ThemeData
       theme: ThemeData(
@@ -103,8 +106,9 @@ class _MyHomeAppState extends State<MyHomeApp> {
         context: context,
         builder: (_) {
           return GestureDetector(
-            behavior: HitTestBehavior.opaque, onTap: () {},
-            //child: NewTransaction(createTxDAO),
+            onTap: () {},
+            child: NewTransaction(createTxDAO),
+            behavior: HitTestBehavior.opaque,
           );
         });
   }
@@ -121,7 +125,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
           ),
         ],
       ),
-      body:Column(
+      body: Column(
         children: <Widget>[
           Chart(_last7DaysTx),
           //TransactionList(_listTransaction, deleteTxDAO);
