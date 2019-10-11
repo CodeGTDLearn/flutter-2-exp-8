@@ -65,3 +65,36 @@ class _NewTransactionState extends State<NewTransaction> {
     );
   }
 
+  void _showDataPicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((datePicked) {
+      if (datePicked == null) return;
+      setState(() {
+        _selectedDate = datePicked;
+      });
+    });
+  }
+
+  void _submitData() {
+    double parsedAmount = double.parse(amountController.text);
+
+    if (titleController.text.isEmpty ||
+        amountController.text.isEmpty ||
+        parsedAmount <= 0 ||
+        _selectedDate == null) {
+      return;
+    }
+
+    widget._createTxDAO(
+      titleController.text,
+      double.parse(amountController.text),
+      _selectedDate,
+    );
+
+    Navigator.of(context).pop();
+  }
+}
