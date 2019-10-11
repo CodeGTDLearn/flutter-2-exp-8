@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'entity/transaction.dart';
 import 'widget/chart.dart';
 import 'widget/newTransaction.dart';
+import 'widget/transactioList.dart';
 
 void main() {
   runApp(MyApp());
@@ -128,7 +129,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
       body: Column(
         children: <Widget>[
           Chart(_last7DaysTx),
-          //TransactionList(_listTransaction, deleteTxDAO);
+          TransactionList(_listTransaction, deleteTxDAO),
         ],
       ),
       floatingActionButton: FloatingActionButton(
