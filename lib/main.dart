@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepOrangeAccent,
         fontFamily: 'QuickSand',
 
-
         //Text Theme
         textTheme: ThemeData.light().textTheme.copyWith(
               //textTheme title customization
@@ -117,21 +116,32 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    final usefulArea =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
+    final appBar = AppBar(
+      title: Text('Personal Expenses 8'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => showAddModal(context),
+        ),
+      ],
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Personal Expenses 8'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => showAddModal(context),
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Chart(_last7DaysTx),
-            TransactionList(_listTransaction, deleteTxDAO),
+            Container(
+              height: usefulArea * 0.4,
+              child: Chart(_last7DaysTx),
+            ),
+            Container(
+              height: usefulArea * 0.4,
+              child: TransactionList(_listTransaction, deleteTxDAO),
+            ),
           ],
         ),
       ),
