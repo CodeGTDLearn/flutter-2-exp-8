@@ -116,9 +116,6 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
-    final usefulArea =
-        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
-
     final appBar = AppBar(
       title: Text('Personal Expenses 8'),
       actions: <Widget>[
@@ -129,17 +126,25 @@ class _MyHomeAppState extends State<MyHomeApp> {
       ],
     );
 
+    //Taking the App usefulArea
+    // size.height => body area
+    // appBar.preferredSize.height => topbar height
+    // padding.top => Status Bar height
+    final usefulArea =
+        (MediaQuery.of(context).size.height - appBar.preferredSize.height) -
+            MediaQuery.of(context).padding.top;
+
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              height: usefulArea * 0.4,
+              height: usefulArea * 0.3,
               child: Chart(_last7DaysTx),
             ),
             Container(
-              height: usefulArea * 0.4,
+              height: usefulArea * 0.7,
               child: TransactionList(_listTransaction, deleteTxDAO),
             ),
           ],
