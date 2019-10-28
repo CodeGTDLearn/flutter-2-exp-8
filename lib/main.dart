@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'entity/transaction.dart';
 import 'widget/chart.dart';
@@ -7,6 +8,10 @@ import 'widget/newTransaction.dart';
 import 'widget/transactioList.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(MyApp());
 }
 
@@ -24,7 +29,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
         accentColor: Colors.deepOrangeAccent,
         fontFamily: 'QuickSand',
-
 
         //Text Theme
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -117,21 +121,37 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Personal Expenses 8'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => showAddModal(context),
+        ),
+      ],
+    );
+
+    //Taking the App usefulArea
+    // size.height => body area
+    // appBar.preferredSize.height => topbar height
+    // padding.top => Status Bar height
+    final usefulArea =
+        (MediaQuery.of(context).size.height - appBar.preferredSize.height) -
+            MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Personal Expenses 8'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => showAddModal(context),
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Chart(_last7DaysTx),
-            TransactionList(_listTransaction, deleteTxDAO),
+            Container(
+              height: usefulArea * 0.3,
+              child: Chart(_last7DaysTx),
+            ),
+            Container(
+              height: usefulArea * 0.7,
+              child: TransactionList(_listTransaction, deleteTxDAO),
+            ),
           ],
         ),
       ),
