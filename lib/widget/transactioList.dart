@@ -1,6 +1,5 @@
 import 'package:exp8/entity/transaction.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
@@ -14,19 +13,21 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 450,
       child: _listTransaction.isEmpty
-          ? Column(
-              children: <Widget>[
-                Text('No items yet'),
-                SizedBox(height: 10),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
+          ? LayoutBuilder(builder: (ctx, constraints) {
+              return Column(
+                children: <Widget>[
+                  Text('No items yet'),
+                  SizedBox(height: 10),
+                  Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              );
+            })
           : ListView.builder(
               itemCount: _listTransaction.length,
               itemBuilder: (context, index) {
@@ -39,7 +40,7 @@ class TransactionList extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FittedBox(
-                              child:  
+                              child:
                                   Text("\$${_listTransaction[index].amount}")),
                         ),
                       ),
