@@ -75,6 +75,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
     ),
   ];
 
+  bool _showChart = false;
+
   void deleteTxDAO(String id) {
     setState(() {
       _listTransaction.removeWhere((tx) => tx.id == id);
@@ -139,14 +141,28 @@ class _MyHomeAppState extends State<MyHomeApp> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              height: usefulArea * 0.3,
-              child: Chart(_last7DaysTx),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(_showChart ? 'List' : 'Chart'),
+                Switch(
+                    value: _showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    })
+              ],
             ),
-            Container(
-              height: usefulArea * 0.7,
-              child: TransactionList(_listTransaction, deleteTxDAO),
-            ),
+            _showChart
+                ? Container(
+                    height: usefulArea * 0.3,
+                    child: Chart(_last7DaysTx),
+                  )
+                : Container(
+                    height: usefulArea * 0.7,
+                    child: TransactionList(_listTransaction, deleteTxDAO),
+                  ),
           ],
         ),
       ),
