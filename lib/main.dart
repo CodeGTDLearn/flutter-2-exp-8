@@ -7,6 +7,10 @@ import 'widget/newTransaction.dart';
 import 'widget/transactioList.dart';
 
 void main() {
+//  SystemChrome.setPreferredOrientations([
+//    DeviceOrientation.portraitUp,
+//    DeviceOrientation.portraitUp,
+//  ]);
   runApp(MyApp());
 }
 
@@ -129,7 +133,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
     );
 
     //Taking the App usefulArea
-    // size.height => body area
+    // size.height => Sccafold Body area
     // appBar.preferredSize.height => topbar height
     // padding.top => Status Bar height
     final usefulArea =
@@ -156,7 +160,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
             ),
             _showChart
                 ? Container(
-                    height: usefulArea * 0.3,
+                    height: usefulArea * 0.7,
                     child: Chart(_last7DaysTx),
                   )
                 : Container(
