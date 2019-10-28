@@ -132,52 +132,21 @@ class _MyHomeAppState extends State<MyHomeApp> {
     );
 
     //Taking the App usefulArea
-<<<<<<< HEAD
-    // size.height => body area
-=======
     // size.height => Sccafold Body area
->>>>>>> feat-refact-mediaqueries
     // appBar.preferredSize.height => topbar height
     // padding.top => Status Bar height
     final usefulArea =
         (MediaQuery.of(context).size.height - appBar.preferredSize.height) -
             MediaQuery.of(context).padding.top;
 
-<<<<<<< HEAD
-=======
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
->>>>>>> feat-refact-mediaqueries
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-<<<<<<< HEAD
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(_showChart ? 'List' : 'Chart'),
-                Switch(
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() {
-                        _showChart = val;
-                      });
-                    })
-              ],
-            ),
-            _showChart
-                ? Container(
-                    height: usefulArea * 0.3,
-                    child: Chart(_last7DaysTx),
-                  )
-                : Container(
-                    height: usefulArea * 0.7,
-                    child: TransactionList(_listTransaction, deleteTxDAO),
-                  ),
-=======
             if (isLandscape)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -212,7 +181,6 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 height: usefulArea * 0.7,
                 child: TransactionList(_listTransaction, deleteTxDAO),
               ),
->>>>>>> feat-refact-mediaqueries
           ],
         ),
       ),
