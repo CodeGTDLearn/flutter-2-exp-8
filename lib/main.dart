@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'entity/transaction.dart';
@@ -140,33 +139,48 @@ class _MyHomeAppState extends State<MyHomeApp> {
         (MediaQuery.of(context).size.height - appBar.preferredSize.height) -
             MediaQuery.of(context).padding.top;
 
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(_showChart ? 'List' : 'Chart'),
-                Switch(
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() {
-                        _showChart = val;
-                      });
-                    })
-              ],
-            ),
-            _showChart
-                ? Container(
-                    height: usefulArea * 0.7,
-                    child: Chart(_last7DaysTx),
-                  )
-                : Container(
-                    height: usefulArea * 0.7,
-                    child: TransactionList(_listTransaction, deleteTxDAO),
-                  ),
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(_showChart ? 'List' : 'Chart'),
+                  Switch(
+                      value: _showChart,
+                      onChanged: (val) {
+                        setState(() {
+                          _showChart = val;
+                        });
+                      })
+                ],
+              ),
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: usefulArea * 0.7,
+                      child: Chart(_last7DaysTx),
+                    )
+                  : Container(
+                      height: usefulArea * 0.7,
+                      child: TransactionList(_listTransaction, deleteTxDAO),
+                    ),
+            if (!isLandscape)
+              Container(
+                height: usefulArea * 0.3,
+                child: Chart(_last7DaysTx),
+              ),
+            if (!isLandscape)
+              Container(
+                height: usefulArea * 0.7,
+                child: TransactionList(_listTransaction, deleteTxDAO),
+              ),
           ],
         ),
       ),
