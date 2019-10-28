@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'entity/transaction.dart';
 import 'widget/chart.dart';
@@ -8,10 +7,10 @@ import 'widget/newTransaction.dart';
 import 'widget/transactioList.dart';
 
 void main() {
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitUp,
-  ]);
+//  SystemChrome.setPreferredOrientations([
+//    DeviceOrientation.portraitUp,
+//    DeviceOrientation.portraitUp,
+//  ]);
   runApp(MyApp());
 }
 
