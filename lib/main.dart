@@ -152,7 +152,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(_showChart ? 'List' : 'Chart'),
-                  Switch(
+                  Switch.adaptive(
+                      activeColor: Theme.of(context).accentColor,
                       value: _showChart,
                       onChanged: (val) {
                         setState(() {
