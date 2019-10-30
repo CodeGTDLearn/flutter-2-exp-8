@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import 'adaptativeFlatButton.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function _createTxDAO;
@@ -50,11 +53,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           ? 'No date'
                           : 'Date: ${DateFormat.yMMMd().format(_selectedDate)}'),
                     ),
-                    FlatButton(
-                      child: Text('Date',
-                          style: Theme.of(context).textTheme.button),
-                      onPressed: _showDataPicker,
-                    )
+                    AdaptativeFlatButton('Date', _showDataPicker)
                   ],
                 ),
               ),

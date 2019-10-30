@@ -187,12 +187,12 @@ class _MyHomeAppState extends State<MyHomeApp> {
           ],
         ),
       ),
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
+      floatingActionButton: Platform.isAndroid
+          ? FloatingActionButton(
               onPressed: () => showAddModal(context),
               child: Icon(Icons.add),
-            ),
+            )
+          : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
