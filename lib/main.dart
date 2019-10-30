@@ -32,9 +32,10 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
               //textTheme title customization
               title: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
 
               //textTheme button customization
               button: TextStyle(fontFamily: 'QuickSand', color: Colors.brown),
@@ -130,7 +131,6 @@ class _MyHomeAppState extends State<MyHomeApp> {
         ),
       ],
     );
-
     //Taking the App usefulArea
     // size.height => Sccafold Body area
     // appBar.preferredSize.height => topbar height
