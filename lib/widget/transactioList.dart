@@ -33,7 +33,7 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemCount: _transaction.length,
               itemBuilder: (context, index) {
-                return Transaction_item_card(
+                return Transaction_Item_Card(
                   transaction: _transaction[index],
                   deleteTxDAO: deleteTxDAO,
                 );

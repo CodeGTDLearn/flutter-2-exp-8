@@ -7,7 +7,9 @@ import 'adaptativeFlatButton.dart';
 class NewTransaction extends StatefulWidget {
   final Function _createTxDAO;
 
-  NewTransaction(this._createTxDAO);
+  NewTransaction(this._createTxDAO){
+    print('NEW-TX: Contructor');
+  };
 
   @override
   _NewTransactionState createState() => _NewTransactionState();

@@ -2,11 +2,11 @@ import 'package:exp8/entity/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Transaction_item_card extends StatelessWidget {
+class Transaction_Item_Card extends StatelessWidget {
   final Transaction _transaction;
   final Function deleteTxDAO;
 
-  const Transaction_item_card({
+  const Transaction_Item_Card({
     Key key,
     @required Transaction transaction,
     @required this.deleteTxDAO,

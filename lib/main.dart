@@ -134,6 +134,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
         ),
       ],
     );
+
     //Taking the App usefulArea
     // size.height => Sccafold Body area
     // appBar.preferredSize.height => topbar height
@@ -150,44 +151,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(_showChart ? 'List' : 'Chart'),
-                  Switch.adaptive(
-                      activeColor: Theme.of(context).accentColor,
-                      value: _showChart,
-                      onChanged: (val) {
-                        setState(() {
-                          _showChart = val;
-                        });
-                      })
-                ],
-              ),
-            if (isLandscape)
-              _showChart
-                  ? Container(
-                      height: usefulArea * 0.7,
-                      child: Chart(_last7DaysTx),
-                    )
-                  : Container(
-                      height: usefulArea * 0.7,
-                      child: TransactionList(
-                        _listTransaction,
-                        deleteTxDAO,
-                      ),
-                    ),
-            if (!isLandscape)
-              Container(
-                height: usefulArea * 0.3,
-                child: Chart(_last7DaysTx),
-              ),
-            if (!isLandscape)
-              Container(
-                height: usefulArea * 0.7,
-                child: TransactionList(_listTransaction, deleteTxDAO),
-              ),
+            if (isLandscape) ...buildLandscapeContent(usefulArea),
+            if (!isLandscape) ...buildPortraitContent(usefulArea),
           ],
         ),
       ),
@@ -199,5 +164,49 @@ class _MyHomeAppState extends State<MyHomeApp> {
           : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  List<Widget> buildLandscapeContent(double usefulArea) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(_showChart ? 'List' : 'Chart'),
+          Switch.adaptive(
+              activeColor: Theme.of(context).accentColor,
+              value: _showChart,
+              onChanged: (val) {
+                setState(() {
+                  _showChart = val;
+                });
+              })
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: usefulArea * 0.7,
+              child: Chart(_last7DaysTx),
+            )
+          : Container(
+              height: usefulArea * 0.7,
+              child: TransactionList(
+                _listTransaction,
+                deleteTxDAO,
+              ),
+            )
+    ];
+  }
+
+  List<Widget> buildPortraitContent(double usefulArea) {
+    return [
+      Container(
+        height: usefulArea * 0.3,
+        child: Chart(_last7DaysTx),
+      ),
+      Container(
+        height: usefulArea * 0.7,
+        child: TransactionList(_listTransaction, deleteTxDAO),
+      )
+    ];
   }
 }
