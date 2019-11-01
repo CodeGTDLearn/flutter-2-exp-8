@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
+import './transaction_item_card.dart';
+import '../entity/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final Function deleteTxDAO;
+  final List<Transaction> _transaction;
 
+  TransactionList(this._transaction, this.deleteTxDAO);
 
   @override
   Widget build(BuildContext context) {
     print('Build - Transaction List');
     return Container(
       height: 450,
+      child: _transaction.isEmpty
           ? LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 children: <Widget>[
@@ -26,41 +31,11 @@ class TransactionList extends StatelessWidget {
               );
             })
           : ListView.builder(
-              itemCount: _listTransaction.length,
+              itemCount: _transaction.length,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 8,
-                  margin: EdgeInsets.all(5),
-                  child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FittedBox(
-                              child:
-                                  Text("\$${_listTransaction[index].amount}")),
-                        ),
-                      ),
-                      title: Text(
-                        _listTransaction[index].title,
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                      subtitle: Text(DateFormat.yMMMd()
-                          .format(_listTransaction[index].date)),
-                      trailing: MediaQuery.of(context).size.width > 460
-                          ? FlatButton.icon(
-                              icon: Icon(Icons.delete),
-                              label: Text('Delete'),
-                              textColor: Theme.of(context).errorColor,
-                              onPressed: () =>
-                                  deleteTxDAO(_listTransaction[index].id),
-                            )
-                          : IconButton(
-                              icon: Icon(Icons.delete),
-                              color: Theme.of(context).errorColor,
-                              onPressed: () =>
-                                  deleteTxDAO(_listTransaction[index].id),
-                            )),
+                return Transaction_item_card(
+                  transaction: _transaction[index],
+                  deleteTxDAO: deleteTxDAO,
                 );
               },
             ),

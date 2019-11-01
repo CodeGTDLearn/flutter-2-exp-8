@@ -173,7 +173,10 @@ class _MyHomeAppState extends State<MyHomeApp> {
                     )
                   : Container(
                       height: usefulArea * 0.7,
-                      child: TransactionList(_listTransaction, deleteTxDAO),
+                      child: TransactionList(
+                        _listTransaction,
+                        deleteTxDAO,
+                      ),
                     ),
             if (!isLandscape)
               Container(
