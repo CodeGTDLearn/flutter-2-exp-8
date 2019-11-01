@@ -124,6 +124,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    print('Build - Main');
     final appBar = AppBar(
       title: Text('Personal Expenses 8'),
       actions: <Widget>[

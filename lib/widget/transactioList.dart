@@ -1,18 +1,15 @@
-import 'package:exp8/entity/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 
 class TransactionList extends StatelessWidget {
   final Function deleteTxDAO;
-  final List<Transaction> _listTransaction;
 
-  TransactionList(this._listTransaction, this.deleteTxDAO);
 
   @override
   Widget build(BuildContext context) {
+    print('Build - Transaction List');
     return Container(
       height: 450,
-      child: _listTransaction.isEmpty
           ? LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 children: <Widget>[
