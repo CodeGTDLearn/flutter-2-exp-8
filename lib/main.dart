@@ -65,7 +65,29 @@ class MyHomeApp extends StatefulWidget {
   _MyHomeAppState createState() => _MyHomeAppState();
 }
 
-class _MyHomeAppState extends State<MyHomeApp> {
+//WidgetsBindingObserver: To use App Lifecycle(LF)
+class _MyHomeAppState extends State<MyHomeApp> with WidgetsBindingObserver {
+  //App LF method -- Add 'App LF listener'
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  //App LF method -- This method uses a 'App LF listener' (added above)
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+    super.didChangeAppLifecycleState(state);
+  }
+
+  //App LF method -- Remove 'App LF listener'
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   final List<Transaction> _listTransaction = [
     Transaction(
       id: 't1',
