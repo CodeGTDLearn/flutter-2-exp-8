@@ -7,18 +7,43 @@ import 'adaptativeFlatButton.dart';
 class NewTransaction extends StatefulWidget {
   final Function _createTxDAO;
 
-  NewTransaction(this._createTxDAO){
-    print('NEW-TX: Contructor');
-  };
+  NewTransaction(this._createTxDAO) {
+    print('--------------\nLF_Widget: 1 - Create Widget');
+  }
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('LF_Widget: 2 - Call State');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   DateTime _selectedDate;
+
+  _NewTransactionState() {
+    print('LF_Widget: 3 - Create State');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('LF_Widget: 4 - Init State');
+  }
+
+  @override
+  void didUpdateWidget(NewTransaction oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('LF_Widget: 5 - DidUpdate State');
+  }
+
+  @override
+  void dispose() {
+    print('--------------\nLF_Widget: 6 - Dispose Element');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
