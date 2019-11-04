@@ -167,6 +167,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
   }
 
   List<Widget> buildLandscapeContent(double usefulArea) {
+    final double proportion = 0.7;
+
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -184,11 +186,11 @@ class _MyHomeAppState extends State<MyHomeApp> {
       ),
       _showChart
           ? Container(
-              height: usefulArea * 0.7,
+              height: usefulArea * proportion,
               child: Chart(_last7DaysTx),
             )
           : Container(
-              height: usefulArea * 0.7,
+              height: usefulArea * proportion,
               child: TransactionList(
                 _listTransaction,
                 deleteTxDAO,
@@ -198,13 +200,16 @@ class _MyHomeAppState extends State<MyHomeApp> {
   }
 
   List<Widget> buildPortraitContent(double usefulArea) {
+    final double chartElementProportion = 0.3;
+    final double listElementProportion = 0.7;
+
     return [
       Container(
-        height: usefulArea * 0.3,
+        height: usefulArea * chartElementProportion,
         child: Chart(_last7DaysTx),
       ),
       Container(
-        height: usefulArea * 0.7,
+        height: usefulArea * listElementProportion,
         child: TransactionList(_listTransaction, deleteTxDAO),
       )
     ];
